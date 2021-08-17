@@ -11,8 +11,20 @@ public class User {
 
     @Override
     public String toString() {
-        return  "name: " + name +
-                "\n" + "lastName: " + lastName+
-                "\n" + "age: " + age;
+        return  "User [name: " + name +
+                "" + ", lastName: " + lastName+
+                "" + ", age: " + age + "]\n";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 }

@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
+    static UserDao userDao = new UserDao();
 
     public static void createUser() {
         String name, lastName;
@@ -18,7 +19,7 @@ public class Main {
         age = scanner.nextInt();
 
         User user = new User(name, lastName, age);
-
+        userDao.createUser(user);
         System.out.println("New user: \n" + user);
     }
 
@@ -36,7 +37,9 @@ public class Main {
         System.out.println("Divide: " + Calculator.divide(x, y));
     }
     public static void main(String[] args) {
-        calculate();
+        //calculate();
         createUser();
+        UserDao userDao = new UserDao();
+        System.out.println(userDao.getAllUsers());
     }
 }
