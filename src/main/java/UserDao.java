@@ -28,7 +28,7 @@ public class UserDao {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            String query = "select * from " + tableName;
+            String query = "SELECT * FROM " + tableName;
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
@@ -45,6 +45,7 @@ public class UserDao {
         }
         return users;
     }
+
     public void createUser(User user) {
         PreparedStatement statement;
 
@@ -60,6 +61,20 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void deleteUser(String lastName) {
+        PreparedStatement statement;
+
+        try {
+            String query = "DELETE FROM " + tableName + " where lastname =?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, lastName);
+
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

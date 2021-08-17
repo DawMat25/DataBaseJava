@@ -23,6 +23,16 @@ public class Main {
         System.out.println("New user: \n" + user);
     }
 
+    public static void deleteUser() {
+        String lastName;
+
+        System.out.println("Write last name of user to delete: ");
+        lastName = scanner.next();
+
+        userDao.deleteUser(lastName);
+        System.out.println("Deleted user: " + lastName);
+    }
+
     public static void calculate() {
         Integer x, y;
 
@@ -39,7 +49,8 @@ public class Main {
     public static void main(String[] args) {
         //calculate();
         createUser();
-        UserDao userDao = new UserDao();
+        System.out.println(userDao.getAllUsers());
+        deleteUser();
         System.out.println(userDao.getAllUsers());
     }
 }
