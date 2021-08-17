@@ -32,11 +32,12 @@ public class UserDao {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                Integer id = resultSet.getInt("ID");
                 String name = resultSet.getString("name");
                 String lastName = resultSet.getString("lastname");
                 Integer age = resultSet.getInt("age");
 
-                User user = new User(name, lastName, age);
+                User user = new User(id, name, lastName, age);
                 users.add(user);
             }
             statement.close();
@@ -70,6 +71,24 @@ public class UserDao {
             String query = "DELETE FROM " + tableName + " where lastname =?";
             statement = connection.prepareStatement(query);
             statement.setString(1, lastName);
+
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUser(User user) {
+        PreparedStatement statement;
+
+        try {
+            String query = "UPDATE " + tableName + " SET name = ?, lastname = ?, age = ? WHERE ID=?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getLastName());
+            statement.setInt(3, user.getAge());
+            statement.setInt(4, user.getId());
 
             statement.execute();
             statement.close();

@@ -1,9 +1,10 @@
 public class User {
     private String name;
     private String lastName;
-    private Integer age;
+    private Integer age, id;
 
-    public User(String name, String lastName, Integer age) {
+    public User(Integer id, String name, String lastName, Integer age) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -11,7 +12,8 @@ public class User {
 
     @Override
     public String toString() {
-        return  "User [name: " + name +
+        return  "User [Id: " + id +
+                "" + ", name: " + name +
                 "" + ", lastName: " + lastName+
                 "" + ", age: " + age + "]\n";
     }
@@ -26,5 +28,9 @@ public class User {
 
     public Integer getAge() {
         return age;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
