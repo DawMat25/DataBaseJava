@@ -5,9 +5,10 @@ import java.util.List;
 public class UserDao {
     private Connection connection;
     private final String dataBaseName = "people";
-    private final String tableName = "employees";
+    private final String tableName = "user";
     private final String user = "root";
     private final String password = "admin";
+    private UserRoleDao userRoleDao = new UserRoleDao();
 
     public UserDao() {
         init();
@@ -36,8 +37,10 @@ public class UserDao {
                 String name = resultSet.getString("name");
                 String lastName = resultSet.getString("lastname");
                 Integer age = resultSet.getInt("age");
+                Integer userRoleId = resultSet.getInt("user_role_id");
+                UserRole userRole = userRoleDao.getRoleById(userRoleId);
 
-                User user = new User(id, name, lastName, age);
+                User user = new User(id, name, lastName, age, userRole);
                 users.add(user);
             }
             statement.close();
@@ -51,11 +54,14 @@ public class UserDao {
         PreparedStatement statement;
 
         try {
-            String query = "INSERT INTO " + tableName + " (name, lastname, age) VALUES(?,?,?)";
+            Integer roleId = userRoleDao.getRoleIdByName(user.getUserRole().getRole().name());
+            String query = "INSERT INTO " + tableName + " (name, lastname, age, user_role_id) VALUES(?,?,?,?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getName());
             statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
+            statement.setInt(4, roleId);
+            System.out.println(roleId);
 
             statement.execute();
             statement.close();
@@ -83,12 +89,14 @@ public class UserDao {
         PreparedStatement statement;
 
         try {
-            String query = "UPDATE " + tableName + " SET name = ?, lastname = ?, age = ? WHERE ID=?";
+            Integer roleId = userRoleDao.getRoleIdByName(user.getUserRole().getRole().name());
+            String query = "UPDATE " + tableName + " SET name = ?, lastname = ?, age = ?, user_role_id = ? WHERE ID=?";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getName());
             statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
-            statement.setInt(4, user.getId());
+            statement.setInt(5, user.getId());
+            statement.setInt(4, roleId);
 
             statement.execute();
             statement.close();

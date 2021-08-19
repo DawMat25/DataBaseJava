@@ -50,7 +50,7 @@ public class UserRoleDao {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM " + tableName + " WHERE ID = " + id;
+            String query = "SELECT * FROM " + tableName + " WHERE ID = '" + id + "'";
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
@@ -70,7 +70,7 @@ public class UserRoleDao {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM " + tableName + " WHERE ROLE = " + roleName;
+            String query = "SELECT * FROM " + tableName + " WHERE ROLE = '" + roleName + "'";
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
