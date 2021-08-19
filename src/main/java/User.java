@@ -3,19 +3,22 @@ public class User {
     private String lastName;
     private Integer age, id;
     private UserRole userRole;
+    private UserAddress userAddress;
 
-    public User(String name, String lastName, Integer age, UserRole userRole) {
+    public User(String name, String lastName, Integer age, UserRole userRole, UserAddress userAddress) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.userRole = userRole;
+        this.userAddress = userAddress;
     }
-    public User(Integer id, String name, String lastName, Integer age, UserRole userRole) {
+    public User(Integer id, String name, String lastName, Integer age, UserRole userRole, UserAddress userAddress) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.userRole = userRole;
+        this.userAddress = userAddress;
     }
 
     @Override
@@ -24,7 +27,8 @@ public class User {
                 "" + ", name: " + name +
                 "" + ", lastName: " + lastName +
                 "" + ", age: " + age +
-                "" + ", user role: " + userRole + "]\n";
+                "" + ", user role: " + userRole +
+                "" + ", user address: " + userAddress +"]\n";
     }
 
     public String getName() {
@@ -45,5 +49,9 @@ public class User {
 
     public UserRole getUserRole() {
         return userRole;
+    }
+
+    public UserAddress getUserAddress() {
+        return userAddress;
     }
 }
